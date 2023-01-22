@@ -38,3 +38,28 @@ const data=[
   {id:'ringtone', letter:'C', src:'https://www.myinstants.com/media/sounds/ringtone.mp3'},
   
 ]
+class DrumPad extends React.Component {
+ 
+  componentDidMount() {
+    console.log(this.audio)
+    document.addEventListener('keydown', this.handleKeydown)
+    window.focus()
+  }
+  
+ componentWillUnmount() {
+   document.removeEventListener('keydown', this.handleKeydown)
+ }
+  
+  handleKeydown = e => {
+    if(e.keyCode === this.props.letter.charCodeAt()) {
+      this.audio.play()
+      this.audio.currentTime = 0
+      this.props.handleDisplay(this.props.id)
+    }
+  }
+ 
+  handleClick = () => {
+    this.audio.play()
+    this.audio.currentTime = 0
+    this.props.handleDisplay(this.props.id)
+  }
